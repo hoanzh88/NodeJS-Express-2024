@@ -1,0 +1,17 @@
+# Sử dụng Redis image chính thức từ Docker Hub
+FROM redis:latest
+
+# Tạo một thư mục tùy chỉnh để lưu trữ dữ liệu Redis (không bắt buộc)
+RUN mkdir -p /data
+
+# Chuyển vào thư mục vừa tạo
+WORKDIR /data
+
+# Khai báo biến môi trường (nếu cần, ví dụ: thiết lập mật khẩu Redis)
+# ENV REDIS_PASSWORD yourpassword
+
+# Mở cổng 6379 để có thể kết nối từ bên ngoài
+EXPOSE 6379
+
+# Chạy Redis server với cấu hình mặc định
+CMD ["redis-server", "--appendonly", "yes"]

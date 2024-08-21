@@ -8,6 +8,7 @@ const getAllProducts = async () => {
     let products = await getCache(cacheKey);
     
     if (!products) {
+      console.log('Fetching products from database...');
       // Nếu không có trong cache, lấy từ database
       const [result] = await pool.query('SELECT * FROM product LIMIT 10');
       products = result;

@@ -28,9 +28,9 @@ router.get('/list2', verifyToken, checkPermission('view_products'), (req, res) =
     });
 });
 
-router.get('/list3', verifyToken, (req, res) => {
+router.get('/list3', verifyToken, async (req, res) => {
   try {
-    const all_products = getAllProducts();
+    const all_products = await getAllProducts();
     res.json(all_products); 
   } catch (error) {
     console.error(error);

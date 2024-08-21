@@ -5,8 +5,8 @@ const checkPermission = (requiredPermission) => {
 
         
     const userId = req.userId;
-    console.log(userId);
-    console.log(requiredPermission);
+    // console.log(userId);
+    // console.log(requiredPermission);
 
   pool.query(`
        SELECT p.name
