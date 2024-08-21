@@ -1,9 +1,29 @@
 const express = require('express');
 const router = module.exports = express.Router({mergeParams: true});
+const pool = require('../../config/database');
+const { verifyToken } = require('../../helpers/auth.helper');
 
-// List products
-router.get('/list', (req, res) => {
-  res.send('List Products API');
+// List products async & await
+router.get('/list', verifyToken, async (req, res) => {
+  // res.send('List Products API');
+  try {
+    const [rows] = await pool.query('SELECT * FROM product LIMIT 10');
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Database query error.' });
+  }
+});
+
+router.get('/list2', (req, res) => {
+  pool.query('SELECT * FROM product LIMIT 10')
+    .then(([rows]) => {
+      res.json(rows);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ message: 'Database query error.' });
+    });
 });
 
 // Create product

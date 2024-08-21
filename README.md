@@ -40,3 +40,12 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 ```
+## Sử dụng Nodemon cho Chế Độ Dev
+```
+npm install --save-dev nodemon
+npm run dev
+```
+## Tạo Middleware Xác Thực Token
+```
+npm install mysql2 dotenv
+```
