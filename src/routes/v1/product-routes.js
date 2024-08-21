@@ -3,6 +3,7 @@ const router = module.exports = express.Router({mergeParams: true});
 const pool = require('../../config/database');
 const { verifyToken } = require('../../helpers/auth.helper');
 const { checkPermission  } = require('../../helpers/permission.helper');
+const { getAllProducts } = require('../../services/productService');
 
 // List products async & await
 router.get('/list', verifyToken, async (req, res) => {
@@ -25,6 +26,16 @@ router.get('/list2', verifyToken, checkPermission('view_products'), (req, res) =
       console.error(error);
       res.status(500).json({ message: 'Database query error.' });
     });
+});
+
+router.get('/list3', verifyToken, (req, res) => {
+  try {
+    const all_products = getAllProducts();
+    res.json(all_products); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'getAllProducts error.' });
+  }
 });
 
 // Create product

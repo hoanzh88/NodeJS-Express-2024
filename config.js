@@ -7,5 +7,8 @@ module.exports = {
             "DB_NAME": "test",
             "DB_PASSWORD": ""
         },
+        redis: {
+            "REDIS_URL": "redis://localhost:6379"
+        },
     }],
 };

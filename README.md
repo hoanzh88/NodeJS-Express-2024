@@ -78,3 +78,12 @@ INSERT INTO user_permissions (user_id, permission_id) VALUES (1, 1);
 ### Apply vào router
 
 
+## tách biệt các logic xử lý ( folder services )
+### 
+```
+npm install redis
+```
+
+### 2. Tạo File RedisService.js Trong Folder services
+
+### Sử Dụng RedisService Trong Các Phần Khác Của Ứng Dụng
