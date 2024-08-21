@@ -49,3 +49,32 @@ npm run dev
 ```
 npm install mysql2 dotenv
 ```
+
+## Tạo Permission
+### Tạo Bảng Quyền Truy Cập
+```
+-- Bảng chứa các quyền truy cập
+CREATE TABLE permissions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Bảng chứa quyền truy cập của người dùng
+CREATE TABLE user_permissions (
+  user_id INT NOT NULL,
+  permission_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (permission_id) REFERENCES permissions(id),
+  PRIMARY KEY (user_id, permission_id)
+);
+
+INSERT INTO permissions (name) VALUES ('view_products'), ('create_products');
+INSERT INTO user_permissions (user_id, permission_id) VALUES (1, 1);
+```
+
+### Kiểm Tra Quyền Truy Cập Trong Middleware permission.helper.js
+
+
+### Apply vào router
+
+

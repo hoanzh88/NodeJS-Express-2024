@@ -2,6 +2,7 @@ const express = require('express');
 const router = module.exports = express.Router({mergeParams: true});
 const pool = require('../../config/database');
 const { verifyToken } = require('../../helpers/auth.helper');
+const { checkPermission  } = require('../../helpers/permission.helper');
 
 // List products async & await
 router.get('/list', verifyToken, async (req, res) => {
@@ -15,7 +16,7 @@ router.get('/list', verifyToken, async (req, res) => {
   }
 });
 
-router.get('/list2', (req, res) => {
+router.get('/list2', verifyToken, checkPermission('view_products'), (req, res) => {
   pool.query('SELECT * FROM product LIMIT 10')
     .then(([rows]) => {
       res.json(rows);
